@@ -25,7 +25,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ilanur/directus-extension-ai-operations"
+		"url": "https://github.com/ilanur/directus-extension-giuna-endpoints"
 	},
 	"license": "MIT"
 

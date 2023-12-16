@@ -6,6 +6,8 @@ export default (router) => {
 			const { apiKey, location, fromDate, toDate } = req.query;
 			const data = await fetchHistoricalWeather(apiKey, location, fromDate, toDate);
 			res.json(data);
+            console.log(data);
+
 		} catch (error) {
 			res.status(500).json({ error: error.message });
 		}
@@ -17,19 +19,21 @@ export default (router) => {
 			const { apiKey, query, fromDate, toDate } = req.query;
 			const data = await fetchHistoricalNews(apiKey, query, fromDate, toDate);
 			res.json(data);
+            console.log(data);
 		} catch (error) {
 			res.status(500).json({ error: error.message });
 		}
 	});
 
 	// Endpoint predefinito
-	router.get('/', (req, res) => res.send('Ciao, Mondo!'));
+	router.get('/', (req, res) => res.send('Ciao, Mondo!s2'));
 };
 
-async function fetchHistoricalWeather() {
-	
-	const weatherApiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=${apiKey}&contentType=json&startDateTime=${date}&endDateTime=${date}`;
+async function fetchHistoricalWeather(apiKey, location, fromDate, toDate) {
 
+    const weatherApiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${fromDate}/${toDate}?unitGroup=metric&include=stats%2Cobs%2Cstatsfcst%2Cremote%2Cfcst%2Cevents%2Chours%2Cdays%2Ccurrent%2Calerts&key=${apiKey}&contentType=json`;
+    console.log(weatherApiUrl)
+    
     try {
         const response = await fetch(weatherApiUrl);
         if (!response.ok) {
